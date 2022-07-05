@@ -2,3 +2,4 @@ rootProject.name = "Saba Android Assignment"
 include ':app'
 include ':common'
 include ':domain'
+include ':remote'
