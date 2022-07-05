@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.saba.base.BaseViewModel
 import com.saba.common.Mapper
 import com.saba.common.Resource
-import com.saba.domain.entity.MovieEntityModel
+import com.saba.domain.entity.SearchEntityModel
 import com.saba.domain.usecase.SearchUseCase
 import com.saba.presentation.contract.MainContract
-import com.saba.presentation.model.MovieUiModel
+import com.saba.presentation.model.SearchUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val searchUseCase: SearchUseCase,
-    private val searchMapper : Mapper<List<MovieEntityModel>, List<MovieUiModel>>
+    private val searchMapper : Mapper<SearchEntityModel, SearchUiModel>
 ) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
 
     override fun createInitialState(): MainContract.State {
@@ -56,7 +56,7 @@ class MainViewModel @Inject constructor(
                         }
                         is Resource.Success -> {
                             // Set state
-                            val movies = it.data.data
+                            val movies = it.data
                             setState { copy(searchState = MainContract.SearchState.Success(searchMapper.from(i = movies))) }
                         }
                         is Resource.Error -> {

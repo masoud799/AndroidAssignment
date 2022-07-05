@@ -3,7 +3,7 @@ package com.saba.presentation.contract
 import com.saba.base.UiEffect
 import com.saba.base.UiEvent
 import com.saba.base.UiState
-import com.saba.presentation.model.MovieUiModel
+import com.saba.presentation.model.SearchUiModel
 
 /**
  * Contract of Main Screen
@@ -21,7 +21,7 @@ class MainContract {
     sealed class SearchState {
         object Idle : SearchState()
         object Loading : SearchState()
-        data class Success(val movies : List<MovieUiModel>) : SearchState()
+        data class Success(val searchResult : SearchUiModel) : SearchState()
     }
 
     sealed class Effect : UiEffect {
