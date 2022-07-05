@@ -22,6 +22,7 @@ class MainContract {
         object Idle : SearchState()
         object Loading : SearchState()
         data class Success(val searchResult : SearchUiModel) : SearchState()
+        object NoResult : SearchState()
     }
 
     sealed class Effect : UiEffect {

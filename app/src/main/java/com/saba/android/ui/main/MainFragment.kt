@@ -8,12 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.navArgs
+import com.saba.android.R
 import com.saba.android.databinding.FragmentMainBinding
 import com.saba.base.BaseFragment
 import com.saba.presentation.contract.MainContract
 import com.saba.presentation.vm.MainViewModel
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,14 +32,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         get() = FragmentMainBinding::inflate
 
     override fun prepareView(savedInstanceState: Bundle?) {
+        binding.vm = viewModel
         binding.rvMovies.adapter = adapter
         initObservers()
-        // Fetch movies when search button clicked
-        binding.btnSearch.setOnClickListener {
-            if (!binding.edtSearch.text.isNullOrEmpty()){
-                viewModel.setEvent(MainContract.Event.OnSearchButtonClicked(query = binding.edtSearch.text.toString()))
-            }
-        }
     }
 
     /**
@@ -53,9 +47,23 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     when (val state = it.searchState) {
                         is MainContract.SearchState.Idle -> {
                             binding.loadingPb.isVisible = false
+                            binding.tvMessage.apply {
+                                isVisible = true
+                                text = getString(R.string.search_message)
+                            }
+                            adapter.submitList(null)
+                        }
+                        is MainContract.SearchState.NoResult -> {
+                            binding.loadingPb.isVisible = false
+                            binding.tvMessage.apply {
+                                isVisible = true
+                                text = getString(R.string.search_not_found)
+                            }
+                            adapter.submitList(null)
                         }
                         is MainContract.SearchState.Loading -> {
                             binding.loadingPb.isVisible = true
+                            binding.tvMessage.isVisible = false
                         }
                         is MainContract.SearchState.Success -> {
                             val data = state.searchResult.data

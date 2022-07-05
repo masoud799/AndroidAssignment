@@ -9,6 +9,8 @@ data class MovieNetworkModel(
     val movieTitle: String?,
     @SerialName("movie_title_en")
     val movieTitleEn: String?,
+    @SerialName("pic")
+    val images: PictureNetworkModel?,
     @SerialName("uuid")
     val id: String
 )

@@ -13,33 +13,55 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:padding="16dp">
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="4dp"
+        >
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_poster"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="165:220"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".25"
+            app:url="@{movie.images}" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:paddingHorizontal="16dp"
             android:text="@{movie.movieTitle}"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:fontFamily="@font/iran_sans_bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_movie_title_en"
+            app:layout_constraintEnd_toStartOf="@id/img_poster"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_movie_title_en"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="2"
+            android:paddingHorizontal="16dp"
             android:text="@{movie.movieTitleEn}"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:fontFamily="@font/iran_sans_regular"
+            app:layout_constraintBottom_toBottomOf="@+id/img_poster"
+            app:layout_constraintEnd_toStartOf="@id/img_poster"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

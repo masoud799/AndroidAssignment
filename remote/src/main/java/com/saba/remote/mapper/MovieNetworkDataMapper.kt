@@ -15,6 +15,7 @@ class MovieNetworkDataMapper @Inject constructor() : Mapper<MovieNetworkModel, M
         return MovieDataModel(
             movieTitle = i?.movieTitle,
             movieTitleEn = i?.movieTitleEn,
+            images = PictureNetworkDataMapper().from(i?.images),
             id = i?.id!!
         )
     }
@@ -23,6 +24,7 @@ class MovieNetworkDataMapper @Inject constructor() : Mapper<MovieNetworkModel, M
         return MovieNetworkModel(
             movieTitle = o?.movieTitle,
             movieTitleEn = o?.movieTitleEn,
+            images = PictureNetworkDataMapper().to(o?.images),
             id = o?.id!!
         )
     }

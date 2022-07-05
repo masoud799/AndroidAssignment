@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mainBackgroundColor">#1c1c1c</color>
+    <color name="searchBoxBackgroundColor">#131313</color>
+    <color name="primary">#ffc23b</color>
+    <color name="secondary">#0E0E0E</color>
+    <color name="accent">#F3AC0F</color>
 </resources>

@@ -15,6 +15,7 @@ class MovieDataDomainMapper @Inject constructor() : Mapper<MovieDataModel, Movie
         return MovieEntityModel(
             movieTitle = i?.movieTitle,
             movieTitleEn = i?.movieTitleEn,
+            images = PictureDataDomainMapper().from(i?.images),
             id = i?.id!!
         )
     }
@@ -23,6 +24,7 @@ class MovieDataDomainMapper @Inject constructor() : Mapper<MovieDataModel, Movie
         return MovieDataModel(
             movieTitle = o?.movieTitle,
             movieTitleEn = o?.movieTitleEn,
+            images = PictureDataDomainMapper().to(o?.images),
             id = o?.id!!
         )
     }

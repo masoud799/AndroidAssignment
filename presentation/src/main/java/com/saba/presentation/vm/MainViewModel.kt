@@ -1,5 +1,8 @@
 package com.saba.presentation.vm
 
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.saba.base.BaseViewModel
@@ -15,12 +18,18 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val searchUseCase: SearchUseCase,
-    private val searchMapper : Mapper<SearchEntityModel, SearchUiModel>
+    private val searchMapper: Mapper<SearchEntityModel, SearchUiModel>
 ) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
+
+    private val handler: Handler by lazy {
+        Handler(Looper.getMainLooper())
+    }
+    private lateinit var searchRunnable: Runnable
 
     override fun createInitialState(): MainContract.State {
         return MainContract.State(
@@ -37,10 +46,26 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun afterSearchQueryTextChanged(text: Editable?) {
+        if (this::searchRunnable.isInitialized) {
+            handler.removeCallbacks(searchRunnable)
+        }
+        searchRunnable = Runnable { checkSearchQuery(text) }
+        handler.postDelayed(searchRunnable, 500)
+    }
+
+    private fun checkSearchQuery(text: Editable?) {
+        if (text.isNullOrEmpty()) {
+            setState { copy(searchState = MainContract.SearchState.Idle) }
+            return
+        }
+        searchQuery(query = text.toString())
+    }
+
     /**
-     * Fetch Post Comments
+     * Fetch search result
      */
-    private fun searchQuery(query : String?) {
+    private fun searchQuery(query: String?) {
         viewModelScope.launch {
             searchUseCase.execute(query)
                 .onStart { emit(Resource.Loading) }
@@ -57,7 +82,17 @@ class MainViewModel @Inject constructor(
                         is Resource.Success -> {
                             // Set state
                             val movies = it.data
-                            setState { copy(searchState = MainContract.SearchState.Success(searchMapper.from(i = movies))) }
+                            if (movies.data.isNullOrEmpty()) {
+                                setState { copy(searchState = MainContract.SearchState.NoResult) }
+                            } else {
+                                setState {
+                                    copy(
+                                        searchState = MainContract.SearchState.Success(
+                                            searchMapper.from(i = movies)
+                                        )
+                                    )
+                                }
+                            }
                         }
                         is Resource.Error -> {
                             // Set Effect
@@ -66,5 +101,12 @@ class MainViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    override fun onCleared() {
+        if (this::searchRunnable.isInitialized) {
+            handler.removeCallbacks(searchRunnable)
+        }
+        super.onCleared()
     }
 }
