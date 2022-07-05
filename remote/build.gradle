@@ -39,7 +39,7 @@ android {
 dependencies {
 
     implementation project(":common")
-
+    implementation project(':data')
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

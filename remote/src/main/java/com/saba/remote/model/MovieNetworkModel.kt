@@ -8,15 +8,7 @@ data class MovieNetworkModel(
     @SerialName("movie_title")
     val movieTitle: String?,
     @SerialName("movie_title_en")
-    val movie_title_en: String?,
-    @SerialName("pic")
-    val images: ImageNetworkModel?,
+    val movieTitleEn: String?,
     @SerialName("uuid")
     val id: String
-){
-    @Serializable
-    data class ImageNetworkModel(
-        @SerialName("movie_img_s")
-        val smallImage: String?
-    )
-}
+)
