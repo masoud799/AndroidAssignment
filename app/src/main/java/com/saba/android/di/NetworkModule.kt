@@ -76,7 +76,7 @@ object NetworkModule {
     fun provideRetrofitTest(okHttpClient: OkHttpClient) : Retrofit {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("https://www.filimo.com/api/en/v1/")
+            .baseUrl("https://www.filimo.com/")
             .client(okHttpClient)
             .addConverterFactory(Json {
                 ignoreUnknownKeys = true

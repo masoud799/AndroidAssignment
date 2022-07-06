@@ -104,17 +104,8 @@ dependencies {
     androidTestImplementation "com.google.truth:truth:$truthVersion"
     // For small test - large test annotations
     androidTestImplementation "androidx.test:runner:$testRunnerVersion"
-    // Mock objects
-    androidTestImplementation "io.mockk:mockk-android:$mockkAndroidVersion"
 
     // Test with Dagger Hilt
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentTestingVersion" // Create debug source set
-    // Navigation Test
-    androidTestImplementation "androidx.navigation:navigation-testing:$navComponentVersion"
-    // Barista for UI test with Espresso
-    androidTestImplementation("com.schibsted.spain:barista:$baristaVersion") {
-        exclude group: 'org.jetbrains.kotlin' // Only if you already use Kotlin in your project
-    }
 }

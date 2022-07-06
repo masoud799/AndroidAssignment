@@ -18,14 +18,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
- * Detail Fragment
+ * Main Fragment
  */
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel : MainViewModel by viewModels()
-    private val adapter : CommentAdapter by lazy {
-        CommentAdapter()
+    private val adapter : MovieAdapter by lazy {
+        MovieAdapter()
     }
 
     override val bindLayout: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMainBinding

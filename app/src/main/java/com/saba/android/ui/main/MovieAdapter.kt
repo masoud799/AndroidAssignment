@@ -8,9 +8,9 @@ import com.saba.base.BaseRecyclerAdapter
 import com.saba.presentation.model.MovieUiModel
 
 /**
- * Adapter class for Comments RecyclerView
+ * Adapter class for Movies RecyclerView
  */
-class CommentAdapter : BaseRecyclerAdapter<MovieUiModel, RowMovieItemLayoutBinding, MovieViewHolder>(CommentItemDiffUtil()) {
+class MovieAdapter : BaseRecyclerAdapter<MovieUiModel, RowMovieItemLayoutBinding, MovieViewHolder>(MovieItemDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = RowMovieItemLayoutBinding.inflate(
@@ -22,7 +22,7 @@ class CommentAdapter : BaseRecyclerAdapter<MovieUiModel, RowMovieItemLayoutBindi
     }
 }
 
-class CommentItemDiffUtil : DiffUtil.ItemCallback<MovieUiModel>() {
+class MovieItemDiffUtil : DiffUtil.ItemCallback<MovieUiModel>() {
     override fun areItemsTheSame(oldItem: MovieUiModel, newItem: MovieUiModel): Boolean {
         return oldItem.id == newItem.id
     }

@@ -9,6 +9,5 @@
         android:id="@+id/mainFragment"
         android:name="com.saba.android.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-    </fragment>
+        tools:layout="@layout/fragment_main"/>
 </navigation>

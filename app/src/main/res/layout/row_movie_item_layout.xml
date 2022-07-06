@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="4dp"
-        >
+        android:layout_marginVertical="4dp">
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -25,7 +24,7 @@
             app:layout_constraintDimensionRatio="165:220"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".25"
+            app:layout_constraintWidth_percent=".3"
             app:url="@{movie.images}" />
 
         <com.google.android.material.textview.MaterialTextView
